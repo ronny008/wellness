@@ -1368,14 +1368,14 @@ function ContactSection() {
 
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 sm:bottom-5 sm:right-5">
         <a
-          href="tel:+15550101444"
+          href="tel:9809745714"
           aria-label="Call Us"
           className="grid h-12 w-12 place-items-center rounded-full bg-gold-sage text-forest shadow-glow transition hover:scale-105 sm:h-14 sm:w-14"
         >
           <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
         </a>
         <a
-          href="https://wa.me/15550101444"
+          href="https://wa.me/919809745714"
           target="_blank"
           rel="noreferrer"
           aria-label="Chat on WhatsApp"
