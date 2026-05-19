@@ -20,6 +20,7 @@ import {
   Menu,
   MessageCircle,
   Moon,
+  Phone,
   Quote,
   Send,
   Sparkles,
@@ -144,28 +145,64 @@ const transformations = [
     role: "Public Servant",
     image: "/images/transformation1.jpg",
     achievement: "12kg lost • Cortisol reset • Mindful focus",
-    quote: "Working with Dr. Lina was a revelation. I didn't just lose weight; I reclaimed my physical autonomy, calmed my nervous system, and built daily morning rituals that support my high-stress public service role."
+    quote: "Working with Dr. Lina was a revelation. I didn't just lose weight; I reclaimed my physical autonomy, calmed my nervous system, and built daily morning rituals that support my high-stress public service role.",
+    aspect: "aspect-[1.35]"
   },
   {
     name: "Arjun M.",
     role: "Creative Director",
     image: "/images/transformation2.jpg",
     achievement: "Metabolic reset • 15kg lost • Vital energy",
-    quote: "As a designer, I was skeptical of rigid wellness programs. Aurelia was different. It felt bespoke, intellectual, and deeply somatic. My energy levels have doubled, and my creative focus is clearer than ever."
+    quote: "As a designer, I was skeptical of rigid wellness programs. Aurelia was different. It felt bespoke, intellectual, and deeply somatic. My energy levels have doubled, and my creative focus is clearer than ever.",
+    aspect: "aspect-[1.35]"
   },
   {
     name: "Ananya V.",
     role: "Lead Architect",
     image: "/images/transformation3.jpg",
     achievement: "Sleep restoration • Nourished energy",
-    quote: "I came to Aurelia running on caffeine and chronic fatigue. Through gentle sleep sanctuaries and tailored nutrition anchors, I've returned to my natural, vibrant energy signature without extreme rules."
+    quote: "I came to Aurelia running on caffeine and chronic fatigue. Through gentle sleep sanctuaries and tailored nutrition anchors, I've returned to my natural, vibrant energy signature without extreme rules.",
+    aspect: "aspect-[1.35]"
   },
   {
     name: "Meera D.",
     role: "Tech Vice President",
     image: "/images/transformation4.jpg",
     achievement: "Hormonal balance • 10kg lost • Stress relief",
-    quote: "Every session felt like a sanctuary. Lina's coaching restored my metabolic health, gave me peaceful sleep, and taught me stress management somatic tools that keep me grounded in the boardroom."
+    quote: "Every session felt like a sanctuary. Lina's coaching restored my metabolic health, gave me peaceful sleep, and taught me stress management somatic tools that keep me grounded in the boardroom.",
+    aspect: "aspect-[1.35]"
+  },
+  {
+    name: "Sunita R.",
+    role: "Marketing Director",
+    image: "/images/transformation5.jpg",
+    achievement: "22kg lost • Metabolic renewal • Circadian anchors",
+    quote: "I tried countless diets, but nothing worked until Dr. Lina helped me align my nutrition with my circadian rhythms. I feel lighter, more energized, and fully at home in my body.",
+    aspect: "aspect-[0.75]"
+  },
+  {
+    name: "Dr. Aditi M.",
+    role: "Pediatrician",
+    image: "/images/transformation6.jpg",
+    achievement: "18kg lost • Stress recovery • Peaceful rest",
+    quote: "As a doctor, I knew the science, but my schedule left me exhausted. Dr. Lina helped me translate that science into gentle daily practices that restored my weight, sleep, and emotional peace.",
+    aspect: "aspect-[0.85]"
+  },
+  {
+    name: "Kavitha K.",
+    role: "Software Engineer",
+    image: "/images/transformation7.jpg",
+    achievement: "Acne cleared • Gut health • Lymphatic flow",
+    quote: "My skin was a reflection of my chronic gut inflammation and elevated stress. Working on nervous system regulation and custom anti-inflammatory rhythms completely cleared my skin and restored my confidence.",
+    aspect: "aspect-square"
+  },
+  {
+    name: "Vijay P.",
+    role: "Finance VP",
+    image: "/images/transformation8.jpg",
+    achievement: "15kg lost • Visceral fat reduced • Core strength",
+    quote: "I wanted to feel strong and active for my kids. The weekly coaching calls and customized movement playbook gave me a structured, sustainable habit loop. My physical endurance and focus are at an all-time high.",
+    aspect: "aspect-square"
   }
 ];
 
@@ -935,7 +972,8 @@ function JourneySection() {
 
 function TestimonialsSection() {
   const [viewMode, setViewMode] = useState<"words" | "journeys">("journeys");
-  const repeated = [...testimonials, ...testimonials];
+  const repeatedWords = [...testimonials, ...testimonials];
+  const repeatedJourneys = [...transformations, ...transformations];
 
   return (
     <section className="relative overflow-hidden px-4 py-28">
@@ -972,7 +1010,7 @@ function TestimonialsSection() {
       {viewMode === "words" ? (
         <div className="group relative -mx-4 overflow-hidden">
           <div className="flex w-max animate-marquee gap-5 px-4 group-hover:[animation-play-state:paused]">
-            {repeated.map((testimonial, index) => (
+            {repeatedWords.map((testimonial, index) => (
               <div key={`${testimonial.name}-${index}`} className="glass w-[340px] rounded-[2rem] p-6 transition hover:-translate-y-2 hover:shadow-glow">
                 <div className="mb-6 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -1001,46 +1039,48 @@ function TestimonialsSection() {
           </div>
         </div>
       ) : (
-        <div className="mx-auto max-w-7xl px-2 sm:px-4" data-reveal>
-          <div className="grid gap-6 md:grid-cols-2">
-            {transformations.map((item, index) => (
+        <div className="group relative -mx-4 overflow-hidden" data-reveal>
+          <div className="flex w-max animate-marquee gap-5 px-4 group-hover:[animation-play-state:paused]">
+            {repeatedJourneys.map((item, index) => (
               <div
-                key={item.name}
-                className="glass overflow-hidden rounded-[2.2rem] p-5 sm:p-6 flex flex-col justify-between border border-white/60 shadow-premium transition duration-500 hover:-translate-y-1.5 hover:shadow-glow"
+                key={`${item.name}-${index}`}
+                className="glass w-[320px] overflow-hidden rounded-[2rem] p-4 flex flex-col justify-between border border-white/60 shadow-premium transition duration-500 hover:-translate-y-1.5 hover:shadow-glow shrink-0"
               >
-                <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-                  <div className="relative aspect-square w-full overflow-hidden rounded-[1.6rem] border border-forest/10 bg-linen">
+                <div>
+                  <div className="relative aspect-[1.25] w-full overflow-hidden rounded-[1.35rem] border border-forest/8 bg-linen">
                     <Image
                       src={item.image}
                       alt={`${item.name} transformation`}
                       fill
-                      sizes="(min-width: 1024px) 380px, 100vw"
+                      sizes="300px"
                       className="object-cover transition duration-700 hover:scale-103"
                     />
-                    <div className="absolute top-3 left-3 bg-forest/88 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.18em] text-cream">
+                    <div className="absolute top-2.5 left-2.5 bg-forest/90 backdrop-blur-md px-2.5 py-0.8 rounded-full text-[8px] font-bold uppercase tracking-[0.16em] text-cream">
                       Before & After
                     </div>
                   </div>
-                  <div className="flex flex-col justify-between py-1">
-                    <div>
-                      <div className="flex text-gold mb-2.5">
+                  <div className="mt-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="font-serif text-lg font-bold leading-tight text-forest">{item.name}</h3>
+                        <p className="text-[9px] uppercase tracking-[0.14em] text-forest/46 font-semibold mt-0.5">{item.role}</p>
+                      </div>
+                      <div className="flex text-gold shrink-0 pt-0.5">
                         {Array.from({ length: 5 }).map((_, starIndex) => (
-                          <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
+                          <Star key={starIndex} className="h-3 w-3 fill-current" />
                         ))}
                       </div>
-                      <h3 className="font-serif text-2xl font-bold leading-tight text-forest">{item.name}</h3>
-                      <p className="text-[10px] uppercase tracking-[0.16em] text-forest/46 font-semibold mt-0.5">{item.role}</p>
-                      <div className="mt-3.5 inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-bold text-moss uppercase tracking-wider">
-                        <Sparkles className="h-3 w-3 text-gold shrink-0" />
-                        {item.achievement}
-                      </div>
-                      <p className="mt-4 text-xs sm:text-sm leading-6 text-forest/68 italic">&quot;{item.quote}&quot;</p>
                     </div>
-                    <div className="mt-5 border-t border-forest/8 pt-3.5 flex items-center justify-between text-[11px] font-semibold text-moss">
-                      <span>Coached by Dr. Lina Vale</span>
-                      <span className="text-gold font-bold">Bespoke Rituals</span>
+                    <div className="mt-2.5 inline-flex items-center gap-1 rounded-full bg-gold/12 px-2.5 py-0.8 text-[8px] font-bold text-moss uppercase tracking-wider">
+                      <Sparkles className="h-2.5 w-2.5 text-gold shrink-0" />
+                      {item.achievement}
                     </div>
+                    <p className="mt-3 text-xs leading-relaxed text-forest/68 italic line-clamp-4">&quot;{item.quote}&quot;</p>
                   </div>
+                </div>
+                <div className="mt-4.5 border-t border-forest/6 pt-3 flex items-center justify-between text-[9px] font-semibold text-moss">
+                  <span>Coached by Dr. Lina Vale</span>
+                  <span className="text-gold font-bold">Bespoke Rituals</span>
                 </div>
               </div>
             ))}
@@ -1309,15 +1349,30 @@ function ContactSection() {
         </div>
       </div>
 
-      <a
-        href="https://wa.me/15550101444"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="fixed bottom-4 right-4 z-40 grid h-12 w-12 place-items-center rounded-full bg-forest text-cream shadow-glow transition hover:scale-105 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </a>
+      <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 sm:bottom-5 sm:right-5">
+        <a
+          href="tel:+15550101444"
+          aria-label="Call Us"
+          className="grid h-12 w-12 place-items-center rounded-full bg-gold-sage text-forest shadow-glow transition hover:scale-105 sm:h-14 sm:w-14"
+        >
+          <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
+        </a>
+        <a
+          href="https://wa.me/15550101444"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat on WhatsApp"
+          className="grid h-12 w-12 place-items-center rounded-full bg-forest text-cream shadow-glow transition hover:scale-105 sm:h-14 sm:w-14"
+        >
+          <svg
+            className="h-6 w-6 fill-current"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+        </a>
+      </div>
     </section>
   );
 }
