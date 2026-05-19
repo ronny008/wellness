@@ -138,6 +138,37 @@ const testimonials = [
   }
 ];
 
+const transformations = [
+  {
+    name: "Priya S.",
+    role: "Public Servant",
+    image: "/images/transformation1.jpg",
+    achievement: "12kg lost • Cortisol reset • Mindful focus",
+    quote: "Working with Dr. Lina was a revelation. I didn't just lose weight; I reclaimed my physical autonomy, calmed my nervous system, and built daily morning rituals that support my high-stress public service role."
+  },
+  {
+    name: "Arjun M.",
+    role: "Creative Director",
+    image: "/images/transformation2.jpg",
+    achievement: "Metabolic reset • 15kg lost • Vital energy",
+    quote: "As a designer, I was skeptical of rigid wellness programs. Aurelia was different. It felt bespoke, intellectual, and deeply somatic. My energy levels have doubled, and my creative focus is clearer than ever."
+  },
+  {
+    name: "Ananya V.",
+    role: "Lead Architect",
+    image: "/images/transformation3.jpg",
+    achievement: "Sleep restoration • Nourished energy",
+    quote: "I came to Aurelia running on caffeine and chronic fatigue. Through gentle sleep sanctuaries and tailored nutrition anchors, I've returned to my natural, vibrant energy signature without extreme rules."
+  },
+  {
+    name: "Meera D.",
+    role: "Tech Vice President",
+    image: "/images/transformation4.jpg",
+    achievement: "Hormonal balance • 10kg lost • Stress relief",
+    quote: "Every session felt like a sanctuary. Lina's coaching restored my metabolic health, gave me peaceful sleep, and taught me stress management somatic tools that keep me grounded in the boardroom."
+  }
+];
+
 // Programs data removed
 
 const routines = [
@@ -903,46 +934,119 @@ function JourneySection() {
 }
 
 function TestimonialsSection() {
+  const [viewMode, setViewMode] = useState<"words" | "journeys">("journeys");
   const repeated = [...testimonials, ...testimonials];
+
   return (
     <section className="relative overflow-hidden px-4 py-28">
-      <div className="section-shell mb-12 text-center" data-reveal>
+      <div className="section-shell mb-8 text-center" data-reveal>
         <p className="text-sm font-bold uppercase tracking-[0.28em] text-clay">Client love</p>
         <h2 className="mx-auto mt-4 max-w-4xl font-serif text-5xl font-bold leading-none text-forest md:text-7xl">
           Private transformations, softly spoken.
         </h2>
       </div>
 
-      <div className="group relative -mx-4 overflow-hidden">
-        <div className="flex w-max animate-marquee gap-5 px-4 group-hover:[animation-play-state:paused]">
-          {repeated.map((testimonial, index) => (
-            <div key={`${testimonial.name}-${index}`} className="glass w-[340px] rounded-[2rem] p-6 transition hover:-translate-y-2 hover:shadow-glow">
-              <div className="mb-6 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    width={48}
-                    height={48}
-                    sizes="48px"
-                    className="h-12 w-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="font-bold text-forest">{testimonial.name}</div>
-                    <div className="text-xs uppercase tracking-[0.16em] text-forest/46">{testimonial.role}</div>
+      <div className="flex justify-center gap-3 mb-12" data-reveal>
+        <button
+          onClick={() => setViewMode("journeys")}
+          className={`px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition duration-300 ${
+            viewMode === "journeys"
+              ? "bg-forest text-cream shadow-glow"
+              : "bg-white/40 text-forest/70 border border-forest/10 hover:bg-white/60"
+          }`}
+        >
+          Visual Journeys
+        </button>
+        <button
+          onClick={() => setViewMode("words")}
+          className={`px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide transition duration-300 ${
+            viewMode === "words"
+              ? "bg-forest text-cream shadow-glow"
+              : "bg-white/40 text-forest/70 border border-forest/10 hover:bg-white/60"
+          }`}
+        >
+          Heartfelt Words
+        </button>
+      </div>
+
+      {viewMode === "words" ? (
+        <div className="group relative -mx-4 overflow-hidden">
+          <div className="flex w-max animate-marquee gap-5 px-4 group-hover:[animation-play-state:paused]">
+            {repeated.map((testimonial, index) => (
+              <div key={`${testimonial.name}-${index}`} className="glass w-[340px] rounded-[2rem] p-6 transition hover:-translate-y-2 hover:shadow-glow">
+                <div className="mb-6 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      width={48}
+                      height={48}
+                      sizes="48px"
+                      className="h-12 w-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-bold text-forest">{testimonial.name}</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-forest/46">{testimonial.role}</div>
+                    </div>
+                  </div>
+                  <div className="flex text-gold">
+                    {Array.from({ length: 5 }).map((_, starIndex) => (
+                      <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
+                    ))}
                   </div>
                 </div>
-                <div className="flex text-gold">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
-                  ))}
+                <p className="text-base leading-7 text-forest/68">{testimonial.quote}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="mx-auto max-w-7xl px-2 sm:px-4" data-reveal>
+          <div className="grid gap-6 md:grid-cols-2">
+            {transformations.map((item, index) => (
+              <div
+                key={item.name}
+                className="glass overflow-hidden rounded-[2.2rem] p-5 sm:p-6 flex flex-col justify-between border border-white/60 shadow-premium transition duration-500 hover:-translate-y-1.5 hover:shadow-glow"
+              >
+                <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+                  <div className="relative aspect-square w-full overflow-hidden rounded-[1.6rem] border border-forest/10 bg-linen">
+                    <Image
+                      src={item.image}
+                      alt={`${item.name} transformation`}
+                      fill
+                      sizes="(min-width: 1024px) 380px, 100vw"
+                      className="object-cover transition duration-700 hover:scale-103"
+                    />
+                    <div className="absolute top-3 left-3 bg-forest/88 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.18em] text-cream">
+                      Before & After
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-between py-1">
+                    <div>
+                      <div className="flex text-gold mb-2.5">
+                        {Array.from({ length: 5 }).map((_, starIndex) => (
+                          <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
+                        ))}
+                      </div>
+                      <h3 className="font-serif text-2xl font-bold leading-tight text-forest">{item.name}</h3>
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-forest/46 font-semibold mt-0.5">{item.role}</p>
+                      <div className="mt-3.5 inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-bold text-moss uppercase tracking-wider">
+                        <Sparkles className="h-3 w-3 text-gold shrink-0" />
+                        {item.achievement}
+                      </div>
+                      <p className="mt-4 text-xs sm:text-sm leading-6 text-forest/68 italic">&quot;{item.quote}&quot;</p>
+                    </div>
+                    <div className="mt-5 border-t border-forest/8 pt-3.5 flex items-center justify-between text-[11px] font-semibold text-moss">
+                      <span>Coached by Dr. Lina Vale</span>
+                      <span className="text-gold font-bold">Bespoke Rituals</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p className="text-base leading-7 text-forest/68">{testimonial.quote}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
