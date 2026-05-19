@@ -300,8 +300,25 @@ function useSmoothScroll() {
     gsap.ticker.lagSmoothing(0);
     lenis.on("scroll", ScrollTrigger.update);
 
+    // Smooth scroll for hash links
+    const handleAnchorClick = (e: Event) => {
+      const target = e.currentTarget as HTMLAnchorElement;
+      const href = target.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const element = document.querySelector(href) as HTMLElement | null;
+        if (element) {
+          lenis.scrollTo(element, { offset: -80, duration: 1.25 });
+        }
+      }
+    };
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => link.addEventListener("click", handleAnchorClick));
+
     return () => {
       gsap.ticker.remove(update);
+      links.forEach(link => link.removeEventListener("click", handleAnchorClick));
       lenis.destroy();
     };
   }, []);
